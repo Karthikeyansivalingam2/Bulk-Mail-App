@@ -74,8 +74,8 @@ const Dashboard = () => {
     console.log("Sending mail to:", recipientArray);
     console.log("Payload:", { subject, body: message, recipients: recipientArray });
 
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-    axios.post(`${apiUrl}/api/send-mail`, {
+    // Relative URL for Vercel unified deployment
+    axios.post('/api/send-mail', {
       recipients: recipientArray,
       subject: subject,
       body: message

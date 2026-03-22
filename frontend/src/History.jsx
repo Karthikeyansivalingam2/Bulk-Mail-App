@@ -6,8 +6,8 @@ const EmailHistory = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-    axios.get(`${apiUrl}/api/history`).then((res) => {
+    // Relative URL for Vercel unified deployment
+    axios.get('/api/history').then((res) => {
       setData(res.data);
     }).catch(err => {
       console.log("Error loading history", err);
