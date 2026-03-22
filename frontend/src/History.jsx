@@ -39,6 +39,11 @@ const EmailHistory = () => {
               <p style={{ margin: '8px 0', color: '#475569', fontSize: '14px' }}>
                 <strong>Recipients:</strong> {item.recipients.join(', ')}
               </p>
+              {item.status === 'failure' && item.errorDetail && (
+                <p style={{ color: '#ef4444', fontSize: '12px', marginBottom: '8px' }}>
+                  <strong>Error:</strong> {item.errorDetail}
+                </p>
+              )}
               <pre>{item.body}</pre>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#64748b', marginTop: '12px' }}>
                 <Calendar size={14} /> Sent on {new Date(item.createdAt).toLocaleString()}

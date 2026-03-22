@@ -32,6 +32,7 @@ const emailSchema = new mongoose.Schema({
     body: { type: String, required: true },
     recipients: [{ type: String }],
     status: { type: String, enum: ['success', 'failure'], default: 'success' },
+    errorDetail: { type: String },
     createdAt: { type: Date, default: Date.now }
 });
 
@@ -76,7 +77,13 @@ app.post('/api/send-mail', async (req, res) => {
     } catch (error) {
         console.error("Error sending email:", error);
         
-        const emailRecord = new Email({ subject, body, recipients, status: 'failure' });
+        const emailRecord = new Email({ 
+            subject, 
+            body, 
+            recipients, 
+            status: 'failure',
+            errorDetail: error.message 
+        });
         await emailRecord.save();
 
         res.status(500).json({ error: 'Failed to send emails.', details: error.message });
