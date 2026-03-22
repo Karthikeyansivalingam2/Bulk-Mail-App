@@ -74,7 +74,8 @@ const Dashboard = () => {
     console.log("Sending mail to:", recipientArray);
     console.log("Payload:", { subject, body: message, recipients: recipientArray });
 
-    axios.post('http://localhost:5000/api/send-mail', {
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    axios.post(`${apiUrl}/api/send-mail`, {
       recipients: recipientArray,
       subject: subject,
       body: message
