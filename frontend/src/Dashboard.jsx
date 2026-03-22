@@ -89,7 +89,8 @@ const Dashboard = () => {
       setLoading(false);
     }).catch((err) => {
       console.error("Error response:", err);
-      setStatusMsg("Failed to send mails. Server Error.");
+      const errorDetail = err.response ? `Server Error: ${err.response.data.error || err.message}` : `Network Error: Could not connect to backend. Check your VITE_API_URL settings.`;
+      setStatusMsg(errorDetail);
       setIsSuccess(false);
       setLoading(false);
     });
