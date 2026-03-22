@@ -8,7 +8,11 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: '*', // Allow all for now, or specify: 'https://bulk-mail-app-rdfa.vercel.app'
+    methods: ['GET', 'POST'],
+    credentials: true
+}));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/bulkmail').then(() => {
